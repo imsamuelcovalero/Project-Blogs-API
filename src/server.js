@@ -4,8 +4,10 @@ const app = require('./api');
 const errorMiddleware = require('./middlewares/error.middleware');
 
 const loginRoute = require('./routes/login.route');
+const userRoute = require('./routes/user.route');
 
 app.use('/login', loginRoute);
+app.use('/user', userRoute);
 
 app.use(errorMiddleware);
 

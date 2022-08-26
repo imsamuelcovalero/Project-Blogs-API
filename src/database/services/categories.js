@@ -14,10 +14,10 @@ const categoriesService = {
     return newCategory.dataValues;
   },
 
-  // getAll: async () => {
-  //   const users = await User.findAll({ attributes: { exclude: ['password'] } });
-  //   return users;
-  // },
+  getAll: async () => {
+    const categories = await Category.findAll();
+    return categories;
+  },
 
   // getById: async (id) => {
   //   const user = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });

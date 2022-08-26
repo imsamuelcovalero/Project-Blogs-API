@@ -14,11 +14,11 @@ const categoporiesController = {
       .json(newCategory);
   },
 
-  // getAll: async (_req, res) => {
-  //   const users = await userService.getAll();
-  //   console.log('users', users);
-  //   return res.status(200).json(users);
-  // },
+  getAll: async (_req, res) => {
+    const categories = await categoriesService.getAll();
+    console.log('categories', categories);
+    return res.status(200).json(categories);
+  },
 
   // getById: async (req, res) => {
   //   const { id } = req.params;

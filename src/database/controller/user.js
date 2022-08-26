@@ -13,6 +13,12 @@ const userController = {
       .status(201)
       .json({ token });
   },
+
+  getAll: async (_req, res) => {
+    const users = await userService.getAll();
+    console.log('users', users);
+    return res.status(200).json(users);
+  },
 };
 
 module.exports = userController;

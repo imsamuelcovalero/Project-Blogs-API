@@ -24,6 +24,11 @@ const userService = {
     const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '1d' });
     return token;
   },
+
+  getAll: async () => {
+    const users = await User.findAll({ attributes: { exclude: ['password'] } });
+    return users;
+  },
 };
 
 module.exports = userService;

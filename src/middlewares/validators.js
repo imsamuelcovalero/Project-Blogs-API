@@ -1,4 +1,15 @@
 const Joi = require('joi');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const CustomError = require('../errors/CustomError');
+
+const { JWT_SECRET } = process.env;
+
+if (!JWT_SECRET) {
+  const error = Error;
+  error.message = 'JWT_SECRET não foi definido no .env';
+  throw error;
+}
 
 const validators = {
   validateLogin: async (req, res, next) => {
@@ -6,7 +17,6 @@ const validators = {
       email: Joi.string().required()
         .messages({
           'string.empty': '400|Some required fields are missing',
-          // 'string.email': '400|Invalid fields',
         }),
       password: Joi.string().required()
         .messages({
@@ -47,6 +57,22 @@ const validators = {
 
     next();
   },
+
+  auth: async (req, _res, next) => {
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      throw new CustomError(401, 'Token not found');
+    }
+    console.log('authorization', authorization);
+    try {
+      jwt.verify(authorization, JWT_SECRET);
+
+      next();
+    } catch (error) {
+      throw new CustomError(401, 'Expired or invalid token');
+    }
+  }, 
 };
 
 module.exports = validators;

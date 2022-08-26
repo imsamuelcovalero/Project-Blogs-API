@@ -33,9 +33,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     timestamps: false,
-    underscored: true,
+    underscored: false,
     tableName: 'BlogPosts'
   });
+
+  BlogPost.associate = (models) => {
+    BlogPost.belongsTo(models.User, {
+      foreignKey: "id",
+      as: "Users"
+    });
+  };
 
   return BlogPost;
 };

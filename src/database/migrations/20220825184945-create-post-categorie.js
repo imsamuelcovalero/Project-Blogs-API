@@ -9,7 +9,7 @@ module.exports = {
         allowNull: false,
         onDelete: 'CASCADE',
         references: {
-          model: 'Categories',
+          model: 'BlogPosts',
           key: 'id'
         }
       },
@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
         onDelete: 'CASCADE',
         references: {
-          model: 'BlogPosts',
+          model: 'Categories',
           key: 'id'
         }
       }

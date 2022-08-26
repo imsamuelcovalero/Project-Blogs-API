@@ -1,5 +1,13 @@
 require('dotenv').config();
+require('express-async-errors');
 const app = require('./api');
+const errorMiddleware = require('./middlewares/error.middleware');
+
+const loginRoute = require('./routes/login.route');
+
+app.use('/login', loginRoute);
+
+app.use(errorMiddleware);
 
 // não remova a variável `API_PORT` ou o `listen`
 const port = process.env.API_PORT || 3000;

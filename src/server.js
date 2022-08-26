@@ -5,9 +5,11 @@ const errorMiddleware = require('./middlewares/error.middleware');
 
 const loginRoute = require('./routes/login.route');
 const userRoute = require('./routes/user.route');
+const categoriesRoute = require('./routes/categories.route');
 
 app.use('/login', loginRoute);
 app.use('/user', userRoute);
+app.use('/categories', categoriesRoute);
 
 app.use(errorMiddleware);
 

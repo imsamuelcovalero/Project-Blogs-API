@@ -12,6 +12,22 @@ if (!JWT_SECRET) {
 }
 
 const validators = {
+  auth: async (req, _res, next) => {
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      throw new CustomError(401, 'Token not found');
+    }
+    // console.log('authorization', authorization);
+    try {
+      jwt.verify(authorization, JWT_SECRET);
+
+      next();
+    } catch (error) {
+      throw new CustomError(401, 'Expired or invalid token');
+    }
+  },
+
   validateLogin: async (req, res, next) => {
     const schema = Joi.object({
       email: Joi.string().required()
@@ -56,23 +72,26 @@ const validators = {
     }
 
     next();
-  },
-
-  auth: async (req, _res, next) => {
-    const { authorization } = req.headers;
-
-    if (!authorization) {
-      throw new CustomError(401, 'Token not found');
-    }
-    console.log('authorization', authorization);
-    try {
-      jwt.verify(authorization, JWT_SECRET);
-
-      next();
-    } catch (error) {
-      throw new CustomError(401, 'Expired or invalid token');
-    }
   }, 
+
+  validateCategory: async (req, res, next) => {
+    const schema = Joi.object({
+      name: Joi.string().required().messages({
+        'string.empty': '400|"name" is required',
+        'any.required': '400|"name" is required',
+      }),
+    });
+
+    const { error } = schema.validate(req.body);
+    console.log('error', error);
+
+    if (error) {
+      const [status, message] = error.message.split('|');
+      return res.status(Number(status)).json({ message });
+    }
+
+    next();
+  },
 };
 
 module.exports = validators;

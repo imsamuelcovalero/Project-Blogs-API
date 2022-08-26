@@ -6,5 +6,6 @@ const route = Router();
 
 route.post('/', validateUser, userController.create);
 route.get('/', auth, userController.getAll);
+route.get('/:id', auth, userController.getById);
 
 module.exports = route;

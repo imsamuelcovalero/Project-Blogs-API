@@ -24,15 +24,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     published: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DATE
     },
     updated: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DATE
     }
   }, {
-    timestamps: false,
+    // timestamps: false,
+    createdAt: 'published',
+    updatedAt: 'updated',
     underscored: false,
     tableName: 'BlogPosts'
   });

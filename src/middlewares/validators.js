@@ -3,6 +3,8 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const CustomError = require('../errors/CustomError');
 
+const SOME_REQUIRED = '400|Some required fields are missing';
+
 const { JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {
@@ -32,11 +34,11 @@ const validators = {
     const schema = Joi.object({
       email: Joi.string().required()
         .messages({
-          'string.empty': '400|Some required fields are missing',
+          'string.empty': SOME_REQUIRED,
         }),
       password: Joi.string().required()
         .messages({
-          'string.empty': '400|Some required fields are missing',
+          'string.empty': SOME_REQUIRED,
         }),
     });
 
@@ -79,6 +81,30 @@ const validators = {
       name: Joi.string().required().messages({
         'string.empty': '400|"name" is required',
         'any.required': '400|"name" is required',
+      }),
+    });
+
+    const { error } = schema.validate(req.body);
+    console.log('error', error);
+
+    if (error) {
+      const [status, message] = error.message.split('|');
+      return res.status(Number(status)).json({ message });
+    }
+
+    next();
+  },
+
+  validatePost: async (req, res, next) => {
+    const schema = Joi.object({
+      title: Joi.string().required().messages({
+        'string.empty': SOME_REQUIRED,
+      }),
+      content: Joi.string().required().messages({
+        'string.empty': SOME_REQUIRED,
+      }),
+      categoryIds: Joi.array().items(Joi.number().required()).messages({
+        'string.empty': SOME_REQUIRED,
       }),
     });
 

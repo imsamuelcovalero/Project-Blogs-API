@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { userService } = require('../services');
 
 const userController = {

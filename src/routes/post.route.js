@@ -10,5 +10,6 @@ route.post('/', auth, authDecode, validatePost, postController.create);
 route.get('/', auth, authDecode, postController.readAll);
 route.get('/:id', auth, authDecode, postController.readOne);
 route.put('/:id', auth, authDecode, validateUpdatePost, postController.update);
+route.delete('/:id', auth, authDecode, postController.delete);
 
 module.exports = route;

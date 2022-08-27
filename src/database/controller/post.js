@@ -43,6 +43,18 @@ const postController = {
       .status(200)
       .json(updatedPost);
   },
+
+  delete: async (req, res) => {
+    const { id } = req.params;
+    const { id: userId } = req.user;
+    
+    await postService.delete({ id, userId });
+    // console.log('deletedPost', deletedPost);
+
+    return res
+      .status(204)
+      .json();
+  },
 };
 
 module.exports = postController;

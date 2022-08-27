@@ -118,6 +118,27 @@ const validators = {
 
     next();
   },
+  
+  validateUpdatePost: async (req, res, next) => {
+    const schema = Joi.object({
+      title: Joi.string().required().messages({
+        'string.empty': SOME_REQUIRED,
+      }),
+      content: Joi.string().required().messages({
+        'string.empty': SOME_REQUIRED,
+      }),
+    });
+    
+    const { error } = schema.validate(req.body);
+    console.log('error', error);
+
+    if (error) {
+      const [status, message] = error.message.split('|');
+      return res.status(Number(status)).json({ message });
+    }
+
+    next();
+  },
 };
 
 module.exports = validators;

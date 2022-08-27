@@ -69,6 +69,23 @@ const postService = {
 
     return post;
   },
+
+  update: async ({ id, title, content, userId }) => {
+    const verifyUser = await BlogPost.findOne({ where: { userId } });
+    if (!verifyUser) {
+      throw new CustomError(401, 'Unauthorized user');
+    }
+
+    const post = await BlogPost.findOne({ where: { id } });
+    if (!post) {
+      throw new CustomError(404, 'Post does not exist');
+    }
+
+    await post.update({ title, content, where: { id } });
+    const updatedPost = await postService.getById(id);
+    // console.log('updatedPost', updatedPost);
+    return updatedPost;
+  },
 };
 
 module.exports = postService;

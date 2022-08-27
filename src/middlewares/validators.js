@@ -20,7 +20,7 @@ const validators = {
     if (!authorization) {
       throw new CustomError(401, 'Token not found');
     }
-    // console.log('authorization', authorization);
+
     try {
       jwt.verify(authorization, JWT_SECRET);
 

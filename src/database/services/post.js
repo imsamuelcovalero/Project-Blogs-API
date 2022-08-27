@@ -1,5 +1,5 @@
 const CustomError = require('../../errors/CustomError');
-const { BlogPost, sequelize, PostCategory, User } = require('../models');
+const { BlogPost, sequelize, PostCategory, User, Category } = require('../models');
 const verify = require('../../helper/verify');
 
 const postService = {
@@ -28,10 +28,25 @@ const postService = {
     return transactionResult;
   },
 
-  // getAll: async () => {
-  //   const categories = await Post.findAll();
-  //   return categories;
-  // },
+  getAll: async () => {
+    const categories = await BlogPost.findAll({
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: { exclude: ['password'] },
+        },
+        {
+          model: Category,
+          as: 'categories',
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+    return categories;
+  },
 
   // getById: async (id) => {
   //   const user = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });

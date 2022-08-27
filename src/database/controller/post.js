@@ -13,11 +13,11 @@ const postController = {
       .json(newPost);
   },
 
-  // getAll: async (_req, res) => {
-  //   const categories = await PostService.getAll();
-  //   console.log('categories', categories);
-  //   return res.status(200).json(categories);
-  // },
+  readAll: async (_req, res) => {
+    const posts = await postService.getAll();
+    console.log('posts', posts);
+    return res.status(200).json(posts);
+  },
 
   // getById: async (req, res) => {
   //   const { id } = req.params;

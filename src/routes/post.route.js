@@ -7,5 +7,6 @@ const authDecode = require('../middlewares/authDecode');
 const route = Router();
 
 route.post('/', auth, authDecode, validatePost, postController.create);
+route.get('/', auth, authDecode, postController.readAll);
 
 module.exports = route;

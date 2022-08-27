@@ -1,4 +1,5 @@
 const { postService } = require('../services');
+const CustomError = require('../../errors/CustomError');
 
 const postController = {
   create: async (req, res) => {
@@ -19,11 +20,16 @@ const postController = {
     return res.status(200).json(posts);
   },
 
-  // getById: async (req, res) => {
-  //   const { id } = req.params;
-  //   const user = await userService.getById(id);
-  //   return res.status(200).json(user);
-  // },
+  readOne: async (req, res) => {
+    const { id } = req.params;
+    const post = await postService.getById(id);
+
+    if (!post) {
+      throw new CustomError(404, 'Post does not exist');
+    }
+
+    return res.status(200).json(post);
+  },
 };
 
 module.exports = postController;

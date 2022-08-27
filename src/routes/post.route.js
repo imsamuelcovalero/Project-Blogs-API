@@ -8,5 +8,6 @@ const route = Router();
 
 route.post('/', auth, authDecode, validatePost, postController.create);
 route.get('/', auth, authDecode, postController.readAll);
+route.get('/:id', auth, authDecode, postController.readOne);
 
 module.exports = route;

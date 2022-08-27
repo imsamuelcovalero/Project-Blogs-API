@@ -48,15 +48,27 @@ const postService = {
     return categories;
   },
 
-  // getById: async (id) => {
-  //   const user = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
+  getById: async (id) => {
+    const post = await BlogPost.findOne({
+      where: { id },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: { exclude: ['password'] },
+        },
+        {
+          model: Category,
+          as: 'categories',
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
 
-  //   if (!user) {
-  //     throw new CustomError(404, 'User does not exist');
-  //   }
-
-  //   return user;
-  // },
+    return post;
+  },
 };
 
 module.exports = postService;

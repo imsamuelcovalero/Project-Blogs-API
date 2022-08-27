@@ -24,6 +24,17 @@ const userController = {
     const user = await userService.getById(id);
     return res.status(200).json(user);
   },
+
+  deleteMe: async (req, res) => {
+    const { id: userId } = req.user;
+    
+    await userService.delete({ userId });
+    // console.log('deletedPost', deletedPost);
+
+    return res
+      .status(204)
+      .json();
+  },
 };
 
 module.exports = userController;

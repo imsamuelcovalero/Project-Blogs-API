@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const CustomError = require('../../errors/CustomError');
 require('dotenv').config();
-const { User } = require('../models');
+const { User/* , BlogPost */ } = require('../models');
 
 const { JWT_SECRET } = process.env;
 
@@ -38,6 +38,12 @@ const userService = {
     }
 
     return user;
+  },
+
+  delete: async ({ userId: id }) => {
+    const user = await User.findOne({ where: { id } });
+
+    await user.destroy({ where: { id } });
   },
 };
 

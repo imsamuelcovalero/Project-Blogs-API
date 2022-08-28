@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const CustomError = require('../../errors/CustomError');
 const { BlogPost, sequelize, PostCategory, User, Category } = require('../models');
 const verify = require('../../helper/verify');
@@ -28,12 +29,13 @@ const postService = {
     return transactionResult;
   },
 
-  getAll: async () => {
+  getAll: async (userId) => {
     const categories = await BlogPost.findAll({
       include: [
         {
           model: User,
           as: 'user',
+          on: { id: userId },
           attributes: { exclude: ['password'] },
         },
         {
@@ -95,6 +97,26 @@ const postService = {
     }
 
     await post.destroy({ where: { id } });
+  },
+
+  search: async (query, userId) => {
+    const posts = await BlogPost.findAll({
+      where: { [Op.or]: [{ title: { [Op.like]: `%${query}%` } },
+      { content: { [Op.like]: `%${query}%` } }] },
+      include: [{
+        model: User,
+        as: 'user',
+        on: { id: userId },
+        attributes: { exclude: ['password'] },
+      },
+      { model: Category,
+        as: 'categories',
+        through: {
+          attributes: [],
+        } }],
+    });
+    // console.log('Xablauposts', posts);
+    return posts;
   },
 };
 

@@ -6,6 +6,7 @@ const authDecode = require('../middlewares/authDecode');
 
 const route = Router();
 
+route.get('/search', auth, authDecode, postController.search);
 route.post('/', auth, authDecode, validatePost, postController.create);
 route.get('/', auth, authDecode, postController.readAll);
 route.get('/:id', auth, authDecode, postController.readOne);

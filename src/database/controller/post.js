@@ -14,9 +14,11 @@ const postController = {
       .json(newPost);
   },
 
-  readAll: async (_req, res) => {
-    const posts = await postService.getAll();
-    console.log('posts', posts);
+  readAll: async (req, res) => {
+    const { id: userId } = req.user;
+    const posts = await postService.getAll(userId);
+    // console.log('posts', posts);
+    
     return res.status(200).json(posts);
   },
 
@@ -55,6 +57,42 @@ const postController = {
       .status(204)
       .json();
   },
+
+  search: async (req, res) => {
+    const { id: userId } = req.user;
+    const { q } = req.query;
+    const query = q;
+    if (!q) {
+      const allPosts = await postService.getAll(userId);
+      console.log('allPosts', allPosts);
+      return res.status(200).json(allPosts);
+    }
+    const posts = await postService.search(query, userId);
+    console.log('posts', posts);
+    if (!posts) {
+        throw new CustomError(404, 'No posts found');
+    }
+    return res.status(200).json(posts);
+  },
+
+  // search: async (req, res) => {
+  //   const { query } = req.query;
+  //   if (!query) {
+  //     const allPosts = await postService.getAll();
+  //     return res.status(200).json(allPosts);
+  //   }
+  //   const postsByTitle = await postService.searchByTitle(query);
+  //   if (!postsByTitle) {
+  //     const postsByContent = await postService.searchByContent(query);
+  //     if (!postsByContent) {
+  //       throw new CustomError(404, 'No posts found');
+  //     }
+  //     console.log('postsByContent', postsByContent);
+  //     return res.status(200).json(postsByContent);
+  //   }
+  //   console.log('postsByTitle', postsByTitle);
+  //   return res.status(200).json(postsByTitle);
+  // },
 };
 
 module.exports = postController;

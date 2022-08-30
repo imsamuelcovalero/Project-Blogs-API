@@ -3,7 +3,7 @@
 Neste projeto foram realizados CRUDs nas postagens de um blog no padrão de organização MSC e REST, foi utilizado o Sequelize para o gerenciamento do banco de dados.
 ## Técnologias usadas
 Back-end:
-> Desenvolvido usando: NodeJS, ExpressJS, Docker e Sequelize
+> Desenvolvido usando: NodeJS, ExpressJS, Docker, Sequelize e JWT.
 ## Instalando Dependências
 > Backend
 ```bash

@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const { userController } = require('../database/controller');
-const { validateUser, auth } = require('../middlewares/validators');
-const authDecode = require('../middlewares/authDecode');
+const { validateUser } = require('../middlewares/validators');
+const { auth, decode } = require('../middlewares/tokenValidator');
 
 const route = Router();
 
 route.post('/', validateUser, userController.create);
 route.get('/', auth, userController.getAll);
 route.get('/:id', auth, userController.getById);
-route.delete('/me', auth, authDecode, userController.deleteMe);
+route.delete('/me', auth, decode, userController.deleteMe);
 
 module.exports = route;

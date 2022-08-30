@@ -83,7 +83,7 @@ const postService = {
 
     await post.update({ title, content, where: { id } });
     const updatedPost = await postService.getById(id);
-    // console.log('updatedPost', updatedPost);
+
     return updatedPost;
   },
 
@@ -115,7 +115,6 @@ const postService = {
           attributes: [],
         } }],
     });
-    // console.log('Xablauposts', posts);
     return posts;
   },
 };

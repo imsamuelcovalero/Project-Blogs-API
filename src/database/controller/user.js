@@ -29,7 +29,6 @@ const userController = {
     const { id: userId } = req.user;
     
     await userService.delete({ userId });
-    // console.log('deletedPost', deletedPost);
 
     return res
       .status(204)

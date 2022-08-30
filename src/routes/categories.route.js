@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { categoriesController } = require('../database/controller');
-const { auth, validateCategory } = require('../middlewares/validators');
+const { validateCategory } = require('../middlewares/validators');
+const { auth } = require('../middlewares/tokenValidator');
 
 const route = Router();
 

@@ -7,7 +7,6 @@ const postController = {
     const { email } = req.user;
     
     const newPost = await postService.create({ title, content, categoryIds, email });
-    // console.log('newPost', newPost);
 
     return res
       .status(201)
@@ -17,7 +16,6 @@ const postController = {
   readAll: async (req, res) => {
     const { id: userId } = req.user;
     const posts = await postService.getAll(userId);
-    // console.log('posts', posts);
     
     return res.status(200).json(posts);
   },
@@ -39,7 +37,6 @@ const postController = {
     const { id: userId } = req.user;
     
     const updatedPost = await postService.update({ id, title, content, userId });
-    // console.log('updatedPost', updatedPost);
 
     return res
       .status(200)
@@ -51,7 +48,6 @@ const postController = {
     const { id: userId } = req.user;
     
     await postService.delete({ id, userId });
-    // console.log('deletedPost', deletedPost);
 
     return res
       .status(204)
@@ -74,25 +70,6 @@ const postController = {
     }
     return res.status(200).json(posts);
   },
-
-  // search: async (req, res) => {
-  //   const { query } = req.query;
-  //   if (!query) {
-  //     const allPosts = await postService.getAll();
-  //     return res.status(200).json(allPosts);
-  //   }
-  //   const postsByTitle = await postService.searchByTitle(query);
-  //   if (!postsByTitle) {
-  //     const postsByContent = await postService.searchByContent(query);
-  //     if (!postsByContent) {
-  //       throw new CustomError(404, 'No posts found');
-  //     }
-  //     console.log('postsByContent', postsByContent);
-  //     return res.status(200).json(postsByContent);
-  //   }
-  //   console.log('postsByTitle', postsByTitle);
-  //   return res.status(200).json(postsByTitle);
-  // },
 };
 
 module.exports = postController;

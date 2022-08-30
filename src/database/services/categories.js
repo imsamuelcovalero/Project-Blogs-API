@@ -18,16 +18,6 @@ const categoriesService = {
     const categories = await Category.findAll();
     return categories;
   },
-
-  // getById: async (id) => {
-  //   const user = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
-
-  //   if (!user) {
-  //     throw new CustomError(404, 'User does not exist');
-  //   }
-
-  //   return user;
-  // },
 };
 
 module.exports = categoriesService;

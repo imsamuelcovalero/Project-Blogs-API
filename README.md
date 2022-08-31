@@ -1,6 +1,7 @@
 # Projetct Blogs API
 # Contexto
-Neste projeto foram realizados CRUDs nas postagens de um blog no padrão de organização MSC e REST, foi utilizado o Sequelize para o gerenciamento do banco de dados.
+No projeto de backend da Trybe, API de Blogs, utilizamos #CRUDs para as diversas operações em um blog, tudo armazenado em SQL. Como padrão de organização foi utilizado o MSC, o que contribuiu para a API ser REST. Os erros foram tratados de maneira customizada por um Custom Error. Os commits estão no padrão convencional.
+
 ## Técnologias usadas
 Back-end:
 > Desenvolvido usando: NodeJS, ExpressJS, Docker, Sequelize, JWT e Joi.

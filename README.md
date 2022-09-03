@@ -20,7 +20,7 @@ npm install
   * Para colocar subir o nodemon e poder fazer as requisições:
     ```
     Abra um terminal e rode: docker exec -it store_manager bash
-    Dentro do docker execute: npm run debug  
+    Dentro do bash execute: npm run debug  
     ```
 ## Executando Testes
 * Para rodar todos os testes:

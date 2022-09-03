@@ -16,6 +16,10 @@ npm install
   ```
   docker-compose up -d
   *A aplicação estará rodando na porta 3000: http://localhost:3000/ do navegador
+  * Para rodar a aplicação:
+    ```
+    Abra um terminal e rode: docker exec -it store_manager bash
+    Dentro do docker execute: npm run debug  
   ```
 ## Executando Testes
 * Para rodar todos os testes:

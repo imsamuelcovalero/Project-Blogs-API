@@ -17,7 +17,7 @@ npm install
   docker-compose up -d
   *A aplicação estará rodando na porta 3000: http://localhost:3000/ do navegador
   ```
-  * Para rodar a aplicação:
+  * Para colocar subir o nodemon e poder fazer as requisições:
     ```
     Abra um terminal e rode: docker exec -it store_manager bash
     Dentro do docker execute: npm run debug  

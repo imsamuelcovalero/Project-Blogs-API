@@ -11,13 +11,13 @@ Back-end:
 cd Project-Blogs-API
 npm install
 ``` 
-## Executando aplicação
+## Executando aplicação em docker
 * Para rodar o back-end:
   ```
   docker-compose up -d
   *A aplicação estará rodando na porta 3000: http://localhost:3000/ do navegador
   ```
-  * Para colocar subir o nodemon e poder fazer as requisições:
+  * Para subir o nodemon e poder fazer as requisições:
     ```
     Abra um terminal e rode: docker exec -it blogs_api bash
     Dentro do bash execute: npm run debug  
